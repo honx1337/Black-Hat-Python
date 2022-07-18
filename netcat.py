@@ -58,7 +58,8 @@ class NetCat:
         self.socket.bind((self.args.target, self.args.port))
         self.socket.listen(5)
         while True:
-            client_socket, _ = self.socket.accept()
+            client_socket, addr = self.socket.accept()
+            print(f"Zaakceptowano połączenie od {addr[0]}:{addr[1]}")
             client_thread = threading.Thread(target=self.handle, args=(client_socket,))
             client_thread.start()
 
@@ -73,6 +74,7 @@ class NetCat:
                 data = client_socket.recv(4096)
                 if data:
                     file_buffer += data
+                    print(len(file_buffer))
                 else:
                     break
 
@@ -123,3 +125,6 @@ if __name__ == '__main__':
 
 nc = NetCat(args, buffer.encode('utf-8'))
 nc.run
+#something not working
+#after inputting python3 netcat.py -t 192.168.1.203 -p 5555 -l -c on Kali and python3 netcat.py -t 192.168.1.203 -p 5555 on target I should get shell
+#but the script just ends
