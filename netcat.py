@@ -1,14 +1,10 @@
 import argparse
-import cmd
-from email import message
-from http import client
 import socket
 import shlex
 import subprocess
 import sys
 import textwrap
 import threading
-from urllib import response
 
 #Sprawdzamy czy program jest uruchamiany w cmd, jeśli nie to kończymy pracę/checking whether or not the program is in cmd, if not we're killing the process
 def execute(cmd):
