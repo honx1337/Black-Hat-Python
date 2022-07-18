@@ -101,7 +101,7 @@ class NetCat:
    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description = 'Narzędzie netcat, ale w pythonie'
+        description = 'Narzędzie netcat, ale w pythonie',
         formatter_class = argparse.RawDescriptionHelpFormatter,
         epilog = textwrap.dedent('''Przykład uzycia
             netcat.py -t 192.168.1.108 -p 5555 -l -c #powłoka systemu
