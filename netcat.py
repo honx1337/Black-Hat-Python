@@ -13,6 +13,20 @@ def execute(cmd):
         output = subprocess.check_output(shlex.split(cmd), stderr=subprocess.STDOUT)
         return output.decode()
 
+class NetCat:
+    def __init__(self, args, buffer=None):
+        self.args = args
+        self.buffer = buffer
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socker.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    
+    def run(self):
+        if self.args.listen:
+            self.listen()
+        else:
+            self.send()
+
+   
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description = 'Narzędzie netcat, ale w pythonie'
