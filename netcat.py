@@ -10,7 +10,7 @@ import textwrap
 import threading
 from urllib import response
 
-#Sprawdzamy czy program jest uruchamiany w cmd, jeśli nie to kończymy pracę
+#Sprawdzamy czy program jest uruchamiany w cmd, jeśli nie to kończymy pracę/checking whether or not the program is in cmd, if not we're killing the process
 def execute(cmd):
         cmd = cmd.strip()
         if not cmd:
@@ -18,21 +18,21 @@ def execute(cmd):
         output = subprocess.check_output(shlex.split(cmd), stderr=subprocess.STDOUT)
         return output.decode()
 
-#definiujemy podstawową pracę programu
+#definiujemy podstawową pracę programu/defining the basic work of program
 class NetCat:
-    def __init__(self, args, buffer=None): #definiujemy argumenty aby działały na self
+    def __init__(self, args, buffer=None): #definiujemy argumenty aby działały na self/defining the arguments to work on self
         self.args = args
         self.buffer = buffer
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     
-    def run(self): #praca jako serwer/stacja
+    def run(self): #praca jako serwer/stacja // work as server/station
         if self.args.listen:
             self.listen()
         else:
             self.send()
 
-    def send(self): #wysyłka
+    def send(self): #wysyłka/sending
         self.socket.connect((self.args.target, self.args.port))
         if self.buffer:
             self.socket.send(self.buffer)
@@ -45,7 +45,7 @@ class NetCat:
                     data = self.socket.recv(4096)
                     recv_len = len(data)
                     response += data.decode()
-                    if recv_len < 4096: #jeśli nie ma już danych do przesyłu to kończy pracę
+                    if recv_len < 4096: #jeśli nie ma już danych do przesyłu to kończy pracę/if there's no data left, we're ending
                         break
                 if response:
                     print(response)
