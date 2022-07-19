@@ -20,7 +20,7 @@ def hexdump(src, length=16, show=True):
         for line in results:
             print(line)
     else:
-        return results
+        return results #SKOŃCZONO TUTAJ CZYTANIE
 
 #zapisywanie przyjętych danych
 def receive_from(connection):
@@ -84,7 +84,7 @@ def proxy_handler(client_socket, remote_host, remote_port, receive_first):
             print("[#] Nie ma więcej danych, zamykanie połączenia.")
             break
 
-def server_loop(local_host, local_port, remote_host, remote_port, receive_first):
+def server_loop(local_host: str, local_port: int, remote_host: str, remote_port: int, receive_first: bool):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         server.bind((local_host, local_port))
