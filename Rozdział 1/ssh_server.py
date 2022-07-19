@@ -54,7 +54,7 @@ if __name__ == '__main__':
             command = input("Podaj polecenie: ")
             if command != 'exit':
                 chan.send(command)
-                r chan.recv(8192)
+                r = chan.recv(8192)
                 print(r.decode())
             else:
                 chan.send('exit')
