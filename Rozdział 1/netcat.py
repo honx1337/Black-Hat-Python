@@ -121,6 +121,7 @@ if __name__ == '__main__':
     if args.listen:
         buffer = ''
     else:
+        print("Aby przejść dalej wciśnij CTRL+D")
         buffer = sys.stdin.read()
 
 nc = NetCat(args, buffer.encode('utf-8'))
