@@ -50,7 +50,7 @@ def proxy_handler(client_socket, remote_host, remote_port, receive_first):
     remote_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     remote_socket.connect((remote_host, remote_port))
 
-    if receive_first == True:
+    if receive_first:
         remote_buffer = receive_from(remote_socket)
         hexdump(remote_buffer)
 
@@ -120,7 +120,7 @@ def main():
 
     receive_first = sys.argv[5]
 
-    if receive_first == True:
+    if True in receive_first:
         receive_first = True
     else:
         receive_first = False
