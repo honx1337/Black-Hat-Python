@@ -89,10 +89,10 @@ def server_loop(local_host, local_port, remote_host, remote_port, receive_first)
     try:
         server.bind((local_host, local_port))
     except Exception as e:
-        print("Problem z utworzeniem gniazda: $r" % e)
-        print("[!] Brak możliwości nasłuchu na %s:%d" % (local_host, local_port))
-        print("[!] Sprawdź inne gniazda nasłuchu lub zmień uprawnienia.")
-        sys.exit(0)
+         print("Problem z utworzeniem gniazda: $r" % e)
+         print("[!] Brak możliwości nasłuchu na %s:%d" % (local_host, local_port))
+         print("[!] Sprawdź inne gniazda nasłuchu lub zmień uprawnienia.")
+         sys.exit(0)
 
     print("[*] Nasłuch na %s:%d" % (local_host, local_port))
     server.listen(5)
