@@ -21,12 +21,12 @@ def hexdump(src, length=16, show=True):
         for line in results:
             print(line)
     else:
-        return results #SKOŃCZONO TUTAJ CZYTANIE
+        return results
 
 #zapisywanie przyjętych danych
 def receive_from(connection):
     buffer = b""
-    connection.settimeout(5)
+    connection.settimeout(30)
     try:
         while True:
             data = connection.recv(4096)
