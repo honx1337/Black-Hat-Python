@@ -3,8 +3,7 @@ import threading
 import socket
 
 #blokujemy wszystko co nie jest znakami alfabetu
-HEX_FILTER = '',join(
-    [(len(repr(chr(i))) == 3) and chr(i) or '.' for i in range(256)])
+HEX_FILTER = '',join([(len(repr(chr(i))) == 3) and chr(i) or '.' for i in range(256)])
 
 #tłumaczenie znaków na hex i na alfabet
 def hexdump(src, length=16, show=True):
