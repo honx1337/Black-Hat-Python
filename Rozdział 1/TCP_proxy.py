@@ -2,6 +2,7 @@ import sys
 import threading
 import socket
 
+
 #blokujemy wszystko co nie jest znakami alfabetu
 HEX_FILTER = ''.join([(len(repr(chr(i))) == 3) and chr(i) or '.' for i in range(256)])
 
@@ -113,12 +114,12 @@ def main():
         sys.exit(0)
 
     local_host = sys.argv[1]
-    local_port = sys.argv[2]
+    local_port = int(sys.argv[2])
 
     remote_host = sys.argv[3]
-    remote_port = sys.argv[4]
+    remote_port = int(sys.argv[4])
 
-    receive_first = sys.argv[5]
+    receive_first = bool(sys.argv[5])
 
     if True in receive_first:
         receive_first = True
