@@ -63,3 +63,5 @@ if __name__ == '__main__':
                 break
     except KeyboardInterrupt():
         bhSession.close()
+
+#RSA Fuckery/Paramiko fuckery, don't know what to do for now
