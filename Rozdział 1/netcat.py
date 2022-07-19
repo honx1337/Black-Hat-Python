@@ -125,6 +125,3 @@ if __name__ == '__main__':
 
 nc = NetCat(args, buffer.encode('utf-8'))
 nc.run()
-#something not working
-#after inputting python3 netcat.py -t 192.168.1.203 -p 5555 -l -c on Kali and python3 netcat.py -t 192.168.1.203 -p 5555 on target I should get shell
-#but the script just ends
