@@ -106,10 +106,11 @@ def server_loop(local_host, local_port, remote_host, remote_port, receive_first)
         proxy_thread.start()
 
 def main():
-    print("Użycie ./TCP_proxy.py [lokalny host] [lokalny port]", end="")
-    print("[zdalny host] [zdalny port] [najpierw odbieranie]")
-    print("Przykład: python3 TCP_proxy.py 127.0.0.1 9000 10.12.132.1 9000 True")
-    sys.exit(0)
+    if len(sys.argv[1:]) != 5:
+        print("Użycie ./TCP_proxy.py [lokalny host] [lokalny port]", end="")
+        print("[zdalny host] [zdalny port] [najpierw odbieranie]")
+        print("Przykład: python3 TCP_proxy.py 127.0.0.1 9000 10.12.132.1 9000 True")
+        sys.exit(0)
 
     local_host = sys.argv[1]
     local_port = sys.argv[2]
