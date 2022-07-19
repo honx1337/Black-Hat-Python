@@ -50,7 +50,7 @@ class NetCat:
                     self.socket.send(buffer.encode())
         except KeyboardInterrupt:
             print('Operacja przerwana przez Użytkownika')
-            self.socket.close
+            self.socket.close()
             sys.exit()
 
     def listen(self):
@@ -97,7 +97,7 @@ class NetCat:
                 except Exception as e:
                     print(f'Serwer zatrzymany {e}')
                     self.socket.close()
-                    sys.exit
+                    sys.exit()
    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
