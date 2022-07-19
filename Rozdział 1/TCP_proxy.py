@@ -121,7 +121,7 @@ def main():
 
     receive_first = bool(sys.argv[5])
 
-    if True in receive_first:
+    if receive_first == True:
         receive_first = True
     else:
         receive_first = False
