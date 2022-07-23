@@ -70,7 +70,7 @@ def sniff(host):
                 offset = ip_header.ihl *4
                 but = raw_buffer[offset:offset + 8]
                 #Tworzymy strukturę ICMP
-                icmp_header = ICMP(buf)
+                icmp_header = ICMP(buff)
                 print('ICMP -> Typ %s, kod: %s\n' % (icmp_header.type, icmp_header.code))
     except KeyboardInterrupt:
         #jeśli używany jest windows, włączamy tryb nieograniczony
