@@ -68,9 +68,9 @@ def sniff(host):
                 print(f'Długość nagłówka: {ip_header.ihl}, TTL: {ip_header.ttl}')
                 #Wyliczenie początku pakietu ICMP
                 offset = ip_header.ihl *4
-                but = raw_buffer[offset:offset + 8]
+                buf = raw_buffer[offset:offset + 8]
                 #Tworzymy strukturę ICMP
-                icmp_header = ICMP(buff)
+                icmp_header = ICMP(buf)
                 print('ICMP -> Typ %s, kod: %s\n' % (icmp_header.type, icmp_header.code))
     except KeyboardInterrupt:
         #jeśli używany jest windows, włączamy tryb nieograniczony
