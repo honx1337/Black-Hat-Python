@@ -12,7 +12,7 @@ def main():
         socket_protocol = socket.IPPROTO_ICMP
 
     sniffer = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket_protocol)
-    sniffer.bind((host, 0))
+    sniffer.bind((HOST, 0))
     #Przechwytujemy też nagłówki IP
     sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
 
@@ -22,7 +22,7 @@ def main():
     #wczytanie pojedynczego pakietu
     print(sniffer.recvfrom(65565))
 
-    #jeśli używany jest windows, włączamy tryb nieograniczony
+    #jeśli używany jest windows, wyłączamy tryb nieograniczony
     if os.name == 'nt':
         sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_OFF)
 
