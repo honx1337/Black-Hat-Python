@@ -32,34 +32,51 @@ class IP:
             print('%s Brak protokołu o kodzie %s w naszej bazie danych' % (e, self.protocol_num))
             self.protocol = str(self.protocol_num)
 
-    def sniff(host):
-        #utworzenie surowego gniazda i powiązanie go z interfejsem publicznym
-        if os.name == 'nt':
-            socket_protocol = socket.IPPROTO_IP
-        else:
-            socket_protocol = socket.IPPROTO_ICMP
+class ICMP:
+    def __init__(self, buff):
+        header = struct.unpack('<BBHHH', buff)
+        self.type = header[0]
+        self.code = header[1]
+        self.sum = header[2]
+        self.id = header[3]
+        self.seq = header[4]
 
-        sniffer = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket_protocol)
-        sniffer.bind((HOST, 0))
-        #Przechwytujemy też nagłówki IP
-        sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
+def sniff(host):
+    #utworzenie surowego gniazda i powiązanie go z interfejsem publicznym
+    if os.name == 'nt':
+        socket_protocol = socket.IPPROTO_IP
+    else:
+        socket_protocol = socket.IPPROTO_ICMP
 
-        if os.name == 'nt':
-            sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
-        
-        try:
-            while True:
-                #odczytywanie pakietu
-                raw_buffer = sniffer.recvfrom(65535)[0]
-                #utworzenie nagłówka IP na podstawie pierwszych 20B
-                ip_header = IP(raw_buffer[0:20])
-                #wyświetlanie rozpoznanego protokołu i adresów
+    sniffer = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket_protocol)
+    sniffer.bind((HOST, 0))
+    #Przechwytujemy też nagłówki IP
+    sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
+
+    if os.name == 'nt':
+       sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
+    
+    try:
+        while True:
+            #odczytywanie pakietu
+            raw_buffer = sniffer.recvfrom(65535)[0]
+            #utworzenie nagłówka IP na podstawie pierwszych 20B
+            ip_header = IP(raw_buffer[0:20])
+            if ip_header.protocol == 'ICMP':
+            #wyświetlanie rozpoznanego protokołu i adresów
                 print('Protokół: %s %s -> %s' % (ip_header.protocol, ip_header.src_address, ip_header.dst_address))
-        except KeyboardInterrupt:
-            #jeśli używany jest windows, włączamy tryb nieograniczony
-            if os.name == 'nt':
-                sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_OFF)
-            sys.exit()
+                print(f'Długość nagłówka: {ip_header.ihl}, TTL: {ip_header.ttl}')
+                #Wyliczenie początku pakietu ICMP
+                offset = ip_header.ihl *4
+                but = raw_buffer[offset:offset + 8]
+                #Tworzymy strukturę ICMP
+                icmp_header = ICMP(buf)
+                print('ICMP -> Typ %s, kod: %s\n' % (icmp_header.type, icmp_header.code))
+    except KeyboardInterrupt:
+        #jeśli używany jest windows, włączamy tryb nieograniczony
+        if os.name == 'nt':
+            sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_OFF)
+        sys.exit()
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
