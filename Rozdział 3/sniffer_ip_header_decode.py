@@ -49,7 +49,7 @@ def sniff(host):
         socket_protocol = socket.IPPROTO_ICMP
 
     sniffer = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket_protocol)
-    sniffer.bind((HOST, 0))
+    sniffer.bind((host, 0))
     #Przechwytujemy też nagłówki IP
     sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
 
