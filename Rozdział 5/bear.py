@@ -13,7 +13,7 @@ def get_words(resume=None):
 
         def extend_words(word):
             if "." in word:
-                word.put(f'/{word}')
+                words.put(f'/{word}')
             else:
                 words.put(f'/{word}/')
             
