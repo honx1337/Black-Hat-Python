@@ -56,7 +56,7 @@ def dir_bruter(words):
         else:
             print(f'{r.status_code} => {url}')
 
-in __name__ == '__main__':
+if __name__ == '__main__':
     words = get_words()
     print('Naciśnij Enter by kontynuować')
     sys.stdin.readline()
