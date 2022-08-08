@@ -17,7 +17,7 @@ def get_words(resume=None):
             else:
                 words.put(f'/{word}/')
             
-            for extensions in EXTENSIONS:
+            for extension in EXTENSIONS:
                 words.put(f'/{word}{extension}')
 
         with open(WORDLIST) as f:
