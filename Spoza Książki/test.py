@@ -1,1 +1,0 @@
-print("Testuje czy jeœli odpalê Visual Studio 2022 to czy muszê odpalaæ gita by pushn¹æ czy nie muszê")
