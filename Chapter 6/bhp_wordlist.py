@@ -47,20 +47,20 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
 
         return menu_list
 
-def wordlist_menu(self,event):
-    #Pobranie informacji o tym, co kliknal uzytkownik
-    http_traffic = self.context.getSelectedMessages()
+    def wordlist_menu(self,event):
+        #Pobranie informacji o tym, co kliknal uzytkownik
+        http_traffic = self.context.getSelectedMessages()
 
-    for traffic in http_traffic:
-        http_service = traffic.getHttpService()
-        host = http_service.getHost()
-        self.hosts.add(host)
-        http_response = traffic.getResponse()
-        if http_response:
-            self.get_words(http_response)
+        for traffic in http_traffic:
+            http_service = traffic.getHttpService()
+            host = http_service.getHost()
+            self.hosts.add(host)
+            http_response = traffic.getResponse()
+            if http_response:
+                self.get_words(http_response)
 
-    self.display_wordlist()
-    return
+        self.display_wordlist()
+        return
 
 def get_words(self, http_response):
     headers, body = http_response.tostring().split('\r\n\r\n', 1)
