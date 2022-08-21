@@ -62,23 +62,23 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
         self.display_wordlist()
         return
 
-def get_words(self, http_response):
-    headers, body = http_response.tostring().split('\r\n\r\n', 1)
+    def get_words(self, http_response):
+        headers, body = http_response.tostring().split('\r\n\r\n', 1)
 
-    #Pominiecie nietekstowych odpowiedzi
-    if headers.lower().find("content-type: text")  == -1:
+        #Pominiecie nietekstowych odpowiedzi
+        if headers.lower().find("content-type: text")  == -1:
+           return
+
+        tag_stripper = TagStripper()
+        page_text = tag_stripper.strip(body)
+        words = re.findall("[a-zA-z]\w{2,}", page_text)
+
+        for word in words:
+            #Odfiltrowanie dlugich lancuchow
+            if len(word) <= 12:
+                self.wordlist.add(word.lower())
+
         return
-
-    tag_stripper = TagStripper()
-    page_text = tag_stripper.strip(body)
-    words = re.findall("[a-zA-z]\w{2,}", page_text)
-
-    for word in words:
-        #Odfiltrowanie dlugich lancuchow
-        if len(word) <= 12:
-            self.wordlist.add(word.lower())
-
-    return
 
 def mangle(self, word):
     year = datetime.now().year
