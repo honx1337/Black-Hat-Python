@@ -44,7 +44,7 @@ class BHPFuzzer(IIntruderPayloadGenerator):
         #Wywolanie mutatora w celu zmiany zadania POST
         payload = self.mutate_payload(payload)
 
-        #Zwiększenie liczby prob fuzzingu
+        #Zwiekszenie liczby prob fuzzingu
         self.num_iterations += 1
 
         return payload
@@ -54,7 +54,7 @@ class BHPFuzzer(IIntruderPayloadGenerator):
         return
 
     def mutate_payload(self, original_payload):
-        #wybierz prosty mutator albo wywolaj skrypt zewnętrznny
+        #wybierz prosty mutator albo wywolaj skrypt zewnetrznny
         picker = random.randint(1, 3)
 
         #wybiera losowe miejsce w zaladunku do zmiany
