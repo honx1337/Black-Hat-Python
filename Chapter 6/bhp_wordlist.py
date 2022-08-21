@@ -80,21 +80,21 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
 
         return
 
-def mangle(self, word):
-    year = datetime.now().year
-    suffixes = ["", "1", "!", year]
-    mangled = []
+    def mangle(self, word):
+        year = datetime.now().year
+        suffixes = ["", "1", "!", year]
+        mangled = []
 
-    for password in (word, word.capitalize()):
-        for suffix in suffixes:
-            mangled.append("%s%s" % (password, suffix))
+        for password in (word, word.capitalize()):
+            for suffix in suffixes:
+                mangled.append("%s%s" % (password, suffix))
 
-    return mangled
+        return mangled
 
-def display_wordlist(self):
-    print('#!comment: lista slow dla strony: %s' % ', '.join(self.hosts))
+    def display_wordlist(self):
+        print('#!comment: lista slow dla strony: %s' % ', '.join(self.hosts))
 
-    for word in sorted(self.wordlist):
-        for password in self.mangle(word):
-            print(password)
-    return
+        for word in sorted(self.wordlist):
+            for password in self.mangle(word):
+                print(password)
+        return
