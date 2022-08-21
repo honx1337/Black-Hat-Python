@@ -43,7 +43,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
     def createMenuItems(self, context_menu):
         self.context = context_menu
         menu_list = ArrayList()
-        menu_list.add(JMenuItem("Utworz liste słow", actionPerformed=self.wordlist_menu))
+        menu_list.add(JMenuItem("Utworz liste slow", actionPerformed=self.wordlist_menu))
 
         return menu_list
 
