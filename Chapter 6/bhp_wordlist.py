@@ -31,7 +31,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
         self.context = None
         self.hosts = set()
 
-        #Na początek sprawdzamy powszechnie używane hasło
+        #Na poczatek sprawdzamy powszechnie uzywane haslo
         self.wordlist = set(["password"])
 
         #Instalacja rozszerzenia
@@ -43,12 +43,12 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
     def createMenuItems(self, context_menu):
         self.context = context_menu
         menu_list = ArrayList()
-        menu_list.add(JMenuItem("Utwórz listę słów", actionPerformed=self.wordlist_menu))
+        menu_list.add(JMenuItem("Utworz liste słow", actionPerformed=self.wordlist_menu))
 
         return menu_list
 
 def wordlist_menu(self,event):
-    #Pobranie informacji o tym, co kliknął użytkownik
+    #Pobranie informacji o tym, co kliknal uzytkownik
     http_traffic = self.context.getSelectedMessages()
 
     for traffic in http_traffic:
@@ -65,7 +65,7 @@ def wordlist_menu(self,event):
 def get_words(self, http_response):
     headers, body = http_response.tostring().split('\r\n\r\n', 1)
 
-    #Pominięcie nietekstowych odpowiedzi
+    #Pominiecie nietekstowych odpowiedzi
     if headers.lower().find("content-type: text")  == -1:
         return
 
@@ -74,7 +74,7 @@ def get_words(self, http_response):
     words = re.findall("[a-zA-z]\w{2,}", page_text)
 
     for word in words:
-        #Odfiltrowanie długich łańcuchów
+        #Odfiltrowanie dlugich lancuchow
         if len(word) <= 12:
             self.wordlist.add(word.lower())
 
@@ -92,7 +92,7 @@ def mangle(self, word):
     return mangled
 
 def display_wordlist(self):
-    print('#!comment: lista słów dla strony: %s' % ', '.join(self.hosts))
+    print('#!comment: lista słow dla strony: %s' % ', '.join(self.hosts))
 
     for word in sorted(self.wordlist):
         for password in self.mangle(word):
