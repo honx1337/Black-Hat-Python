@@ -38,13 +38,13 @@ class BHPFuzzer(IIntruderPayloadGenerator):
             return True
 
     def getNextPayload(self,current_payload):
-        #Konwersja na łańcuch
+        #Konwersja na lancuch
         payload = "".join(chr(x) for x in current_payload)
 
-        #Wywołanie mutatora w celu zmiany żądania POST
+        #Wywolanie mutatora w celu zmiany zadania POST
         payload = self.mutate_payload(payload)
 
-        #Zwiększenie liczby prób fuzzingu
+        #Zwiększenie liczby prob fuzzingu
         self.num_iterations += 1
 
         return payload
@@ -54,23 +54,23 @@ class BHPFuzzer(IIntruderPayloadGenerator):
         return
 
     def mutate_payload(self, original_payload):
-        #wybierz prosty mutator albo wywołaj skrypt zewnętrznny
+        #wybierz prosty mutator albo wywolaj skrypt zewnętrznny
         picker = random.randint(1, 3)
 
-        #wybiera losowe miejsce w załadunku do zmiany
+        #wybiera losowe miejsce w zaladunku do zmiany
         offset = random.randint(0, len(original_payload)-1)
 
         front, back = original_payload[:offset], original_payload[offset:]
 
-        #Próba wtrysku SQL
+        #Proba wtrysku SQL
         if picker == 1:
             front += "'"
 
-        #Próba ataku XSS
+        #Proba ataku XSS
         elif picker == 2:
             front += "<script>alert('BHP!'):</script>"
 
-        #Powtórzenie fragmentu oryginalnego ładunku
+        #Powtorzenie fragmentu oryginalnego ladunku
         elif picker == 3:
             chunk_length = random.randint(0, len(back)-1)
             repeater = random.randint(0, 10)
