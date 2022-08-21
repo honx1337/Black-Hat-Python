@@ -2,7 +2,7 @@ from burp import IBurpExtender
 from burp import IContextMenuFactory
 
 from java.util import ArrayList
-from java.swing import JMenuItem
+from javax.swing import JMenuItem
 
 from datetime import datetime
 from HTMLParser import HTMLParser
