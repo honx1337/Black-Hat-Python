@@ -36,7 +36,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
 
         #Instalacja rozszerzenia
         callbacks.setExtensionName("BHP Wordlist")
-        callbacks.registerContextMenu(self)
+        callbacks.registerContextMenuFactory(self)
 
         return
 
