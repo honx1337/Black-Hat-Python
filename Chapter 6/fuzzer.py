@@ -26,13 +26,14 @@ class BHPFuzzer(IIntruderPayloadGenerator):
         self._extender = extender
         self._helpers = extender._helpers
         self._attack = attack
-        self.max_payloads = 10
-        self.num_iterations = 0
+        print("Fuzzer fuzzuje")
+        self.max_payloads = 1000
+        self.num_payloads = 0
 
         return
 
     def hasMorePayloads(self):
-        if self.num_iterations == self.max_payloads:
+        if self.num_payloads == self.max_payloads:
             return False
         else:
             return True
@@ -45,12 +46,12 @@ class BHPFuzzer(IIntruderPayloadGenerator):
         payload = self.mutate_payload(payload)
 
         #Zwiekszenie liczby prob fuzzingu
-        self.num_iterations += 1
+        self.num_payloads += 1
 
         return payload
 
     def reset(self):
-        self.num_iterations = 0
+        self.num_payloads = 0
         return
 
     def mutate_payload(self, original_payload):
