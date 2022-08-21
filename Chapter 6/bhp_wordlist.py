@@ -92,7 +92,7 @@ def mangle(self, word):
     return mangled
 
 def display_wordlist(self):
-    print('#!comment: lista słow dla strony: %s' % ', '.join(self.hosts))
+    print('#!comment: lista slow dla strony: %s' % ', '.join(self.hosts))
 
     for word in sorted(self.wordlist):
         for password in self.mangle(word):
