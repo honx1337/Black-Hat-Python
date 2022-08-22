@@ -9,4 +9,4 @@
 Expect a lot of errors, I'm a noob, but I'm learning and willing to bug fix as soon as I know how to
 There are programs in this repo not featured in the book, cause I want to have all my black hat python scripts in one place
 
-Aktualnie nie działa/Currently not working: SSH
+Aktualnie nie działa/Currently not working: SSH, Trojan
