@@ -1,4 +1,4 @@
-from scapy.all import sniffy
+from scapy.all import sniff
 IP_MAC_Map = {}
 
 def processPacket(packet):
