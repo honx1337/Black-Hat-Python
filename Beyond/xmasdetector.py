@@ -2,11 +2,11 @@ from scapy.all import IP, sniff, TCP
 
 def flagCheck(flag):
     flag = resp_packet.getlayer('TCP').flags
-    if flag == 0x01:
+    if (0x01 & flag) == 0x01:
         return "FIN"
-    elif flag ==  0x08:
+    if (0x01 & flag) ==  0x08:
         return "PSH"
-    elif flag ==0x20:
+    if (0x01 & flag) ==0x20:
         return "URG"
     else:
         return 0
