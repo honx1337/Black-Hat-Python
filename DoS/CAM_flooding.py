@@ -1,4 +1,4 @@
-from scapy import *
+from scapy.all import (ARP, Ether, conf, send, get_if_hwaddr, RandMAC)
 import sys
 
 def main():
