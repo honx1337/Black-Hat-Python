@@ -75,7 +75,7 @@ class Arper:
             else:
                 time.sleep(2)
 
-    def sniff(self, count=100):
+    def sniff(self, count=300):
         time.sleep(5)
         print(f'Liczba przechwytywanych pakietów: {count}')
         bpf_filter = 'ip host %s' % victim
